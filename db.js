@@ -7,21 +7,22 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
+
   waitForConnections: true,
-  connectionLimit: 10
+  connectionLimit: 10,
+
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 pool.getConnection((err, conn) => {
 
   if (err) {
-
     console.error("❌ Error de conexión:", err);
-
   } else {
-
     console.log("✅ Conectado a Railway MySQL");
     conn.release();
-
   }
 
 });
